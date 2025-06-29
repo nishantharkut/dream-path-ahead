@@ -69,13 +69,13 @@ const Services = () => {
           {services.map((service, index) => (
             <Card 
               key={service.title}
-              className={`group card-hover border-0 shadow-lg bg-card/50 backdrop-blur-sm overflow-hidden ${
+              className={`group card-hover card-neumorphism border-0 shadow-lg overflow-hidden ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
               }`}
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               <CardHeader className="pb-4">
-                <div className={`w-16 h-16 rounded-2xl ${service.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                <div className={`w-16 h-16 rounded-2xl ${service.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg animate-float`}>
                   <service.icon className="w-8 h-8 text-white" />
                 </div>
                 <CardTitle className="text-2xl font-bold text-foreground mb-2 font-poppins">
@@ -97,7 +97,7 @@ const Services = () => {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full btn-primary group">
+                <Button className="w-full btn-primary btn-glow group">
                   Learn More
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>

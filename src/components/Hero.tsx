@@ -5,9 +5,22 @@ import { Button } from '@/components/ui/button';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     setIsVisible(true);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth - 0.5) * 20,
+        y: (e.clientY / window.innerHeight - 0.5) * 20,
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   const scrollToAbout = () => {
@@ -31,11 +44,26 @@ const Hero = () => {
         <div className="absolute inset-0 bg-black/30 dark:bg-black/50"></div>
       </div>
 
-      {/* Animated Background Elements */}
+      {/* Parallax Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-primary/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div 
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse parallax-layer"
+          style={{ transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)` }}
+        ></div>
+        <div 
+          className="absolute top-3/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse parallax-layer" 
+          style={{ 
+            animationDelay: '1s',
+            transform: `translate(${mousePosition.x * 0.3}px, ${mousePosition.y * 0.3}px)`
+          }}
+        ></div>
+        <div 
+          className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-primary/10 rounded-full blur-3xl animate-pulse parallax-layer" 
+          style={{ 
+            animationDelay: '2s',
+            transform: `translate(${mousePosition.x * 0.7}px, ${mousePosition.y * 0.7}px)`
+          }}
+        ></div>
       </div>
 
       {/* Content */}
@@ -43,23 +71,26 @@ const Hero = () => {
         <div className={`transition-all duration-1000 transform ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-6 font-poppins leading-tight">
-            ALL ABOUT YOUR
-            <span className="block text-primary animate-fade-in-up" style={{animationDelay: '0.5s'}}>
-              DREAMS
-            </span>
-          </h1>
-          
-          <p className="text-xl sm:text-2xl text-gray-200 mb-12 max-w-4xl mx-auto leading-relaxed font-inter">
-            Beyond Career empowers students with career guidance, internships, and mentorship. 
-            Founded by IIT Kharagpur alumni, we're here to turn your aspirations into achievements.
-          </p>
+          {/* Glassmorphism Container */}
+          <div className="glassmorphism rounded-3xl p-8 sm:p-12 mb-8 animate-tilt">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-6 font-poppins leading-tight">
+              ALL ABOUT YOUR
+              <span className="block text-primary animate-fade-in-up animate-float" style={{animationDelay: '0.5s'}}>
+                DREAMS
+              </span>
+            </h1>
+            
+            <p className="text-xl sm:text-2xl text-gray-200 mb-8 max-w-4xl mx-auto leading-relaxed font-inter">
+              Beyond Career empowers students with career guidance, internships, and mentorship. 
+              Founded by IIT Kharagpur alumni, we're here to turn your aspirations into achievements.
+            </p>
+          </div>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Button 
               onClick={scrollToAbout}
               size="lg" 
-              className="btn-primary font-semibold px-8 py-4 text-lg rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 group"
+              className="btn-primary btn-glow animate-pulse-glow font-semibold px-8 py-4 text-lg rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 group"
             >
               Discover Your Path
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />

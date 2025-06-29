@@ -46,6 +46,10 @@ One-click deployment to Vercel using `vercel.json` configuration. Simply connect
 - **Performance**: Lazy loading, dynamic imports, optimized assets
 - **Modern Typography**: Inter/Poppins font combination
 - **Professional UI**: Clean, trustworthy design suitable for business
+- **Custom Cursor**: Mouse-driven cursor effects for desktop
+- **Scroll Progress**: Visual progress indicator
+- **Glassmorphism**: Modern glass effect panels
+- **Neumorphism**: Soft, modern card designs
 
 ## Live URL
 
@@ -63,3 +67,5 @@ Will be available after deployment: [https://beyond-career.vercel.app](https://b
 ## Dependencies Added
 
 - `next-themes`: Theme management and dark mode functionality
+
+```

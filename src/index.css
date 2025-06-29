@@ -62,6 +62,7 @@ Design Rationale: Professional, modern design using navy/charcoal palette with b
   body {
     @apply bg-background text-foreground font-inter antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    cursor: none;
   }
 
   html {
@@ -73,6 +74,48 @@ Design Rationale: Professional, modern design using navy/charcoal palette with b
   }
 }
 
+/* Custom Cursor */
+.cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid hsl(var(--primary));
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: all 0.1s ease;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: hsl(var(--primary));
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10000;
+  transition: all 0.1s ease;
+}
+
+/* Scroll Progress Indicator */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  z-index: 1000;
+  background: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 100%);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.1s ease-out;
+}
+
 @layer components {
   .gradient-bg {
     background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.8) 100%);
@@ -82,12 +125,42 @@ Design Rationale: Professional, modern design using navy/charcoal palette with b
     background: linear-gradient(135deg, #1e293b 0%, #334155 50%, hsl(var(--primary)) 100%);
   }
   
+  .glassmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .dark .glassmorphism {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
   .card-hover {
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
   
+  .card-neumorphism {
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+  }
+  
+  .dark .card-neumorphism {
+    background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+    box-shadow: 20px 20px 60px #0f0f0f, -20px -20px 60px #2a2a2a;
+  }
+  
   .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:scale-105 hover:shadow-xl;
+  }
+  
+  .btn-glow {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-glow:hover {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.5), 0 0 60px hsl(var(--primary) / 0.2);
   }
   
   .section-padding {
@@ -96,6 +169,11 @@ Design Rationale: Professional, modern design using navy/charcoal palette with b
   
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .parallax-layer {
+    transform: translateZ(0);
+    will-change: transform;
   }
 }
 
@@ -118,6 +196,22 @@ Design Rationale: Professional, modern design using navy/charcoal palette with b
   
   .animate-scale-in {
     animation: scaleIn 0.4s ease-out forwards;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-tilt {
+    transition: transform 0.3s ease;
+  }
+  
+  .animate-tilt:hover {
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
   }
 }
 
@@ -174,6 +268,24 @@ Design Rationale: Professional, modern design using navy/charcoal palette with b
   }
 }
 
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.6), 0 0 80px hsl(var(--primary) / 0.2);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 6px;
@@ -189,4 +301,10 @@ Design Rationale: Professional, modern design using navy/charcoal palette with b
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-muted-foreground/60;
+}
+
+/* Selection styling */
+::selection {
+  background-color: hsl(var(--primary) / 0.3);
+  color: hsl(var(--foreground));
 }
