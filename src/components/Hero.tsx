@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import TypedText from '@/components/TypedText';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -39,31 +40,53 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 hero-gradient">
-        <div className="absolute inset-0 bg-black/30 dark:bg-black/50"></div>
+      {/* Three-layer Parallax Background */}
+      <div className="absolute inset-0">
+        {/* Layer 1: Base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-light-accent dark:from-dark-bg dark:via-gray-900 dark:to-dark-accent"></div>
+        
+        {/* Layer 2: SVG Waves */}
+        <svg className="absolute bottom-0 w-full h-64 opacity-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,50 C300,100 500,0 800,50 C1000,100 1200,0 1200,50 L1200,120 L0,120 Z" fill="currentColor" className="text-white dark:text-gray-800" />
+        </svg>
+        
+        {/* Layer 3: Floating particles */}
+        <div className="absolute inset-0">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-white dark:bg-gray-300 rounded-full opacity-30 animate-float"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${3 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Parallax Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
-          className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse parallax-layer"
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-light-accent/10 dark:bg-dark-accent/10 rounded-full blur-3xl animate-pulse parallax-layer"
           style={{ transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)` }}
-        ></div>
+        />
         <div 
-          className="absolute top-3/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse parallax-layer" 
+          className="absolute top-3/4 right-1/4 w-96 h-96 bg-light-accent/5 dark:bg-dark-accent/5 rounded-full blur-3xl animate-pulse parallax-layer" 
           style={{ 
             animationDelay: '1s',
             transform: `translate(${mousePosition.x * 0.3}px, ${mousePosition.y * 0.3}px)`
           }}
-        ></div>
+        />
         <div 
-          className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-primary/10 rounded-full blur-3xl animate-pulse parallax-layer" 
+          className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-light-accent/10 dark:bg-dark-accent/10 rounded-full blur-3xl animate-pulse parallax-layer" 
           style={{ 
             animationDelay: '2s',
             transform: `translate(${mousePosition.x * 0.7}px, ${mousePosition.y * 0.7}px)`
           }}
-        ></div>
+        />
       </div>
 
       {/* Content */}
@@ -75,8 +98,8 @@ const Hero = () => {
           <div className="glassmorphism rounded-3xl p-8 sm:p-12 mb-8 animate-tilt">
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-6 font-poppins leading-tight">
               ALL ABOUT YOUR
-              <span className="block text-primary animate-fade-in-up animate-float" style={{animationDelay: '0.5s'}}>
-                DREAMS
+              <span className="block">
+                <TypedText />
               </span>
             </h1>
             
@@ -90,10 +113,11 @@ const Hero = () => {
             <Button 
               onClick={scrollToAbout}
               size="lg" 
-              className="btn-primary btn-glow animate-pulse-glow font-semibold px-8 py-4 text-lg rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 group"
+              className="btn-primary btn-glow animate-pulse-glow font-semibold px-8 py-4 text-lg rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 group relative overflow-hidden"
             >
-              Discover Your Path
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <span className="relative z-10">Discover Your Path</span>
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 relative z-10" />
+              <div className="absolute inset-0 bg-white opacity-0 group-active:opacity-20 rounded-full animate-ripple" />
             </Button>
             <Button 
               variant="outline" 
@@ -121,6 +145,16 @@ const Hero = () => {
             />
           </button>
         </div>
+      </div>
+
+      {/* Sticky Get Started Button */}
+      <div className="fixed bottom-8 right-8 z-50">
+        <Button
+          onClick={scrollToContact}
+          className="bg-light-accent dark:bg-dark-accent text-white px-6 py-3 rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 animate-pulse-glow font-semibold"
+        >
+          Get Started
+        </Button>
       </div>
     </section>
   );

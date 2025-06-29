@@ -53,6 +53,18 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
         },
+        light: {
+          bg: '#FFFFFF',
+          text: '#1F2937',
+          accent: '#2E8BC0',
+          subtext: '#4B5563'
+        },
+        dark: {
+          bg: '#121212',
+          text: '#E5E7EB',
+          accent: '#2E8BC0',
+          subtext: '#9CA3AF'
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -73,6 +85,8 @@ export default {
         'scale-in': 'scaleIn 0.4s ease-out',
         'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
         'float': 'float 3s ease-in-out infinite',
+        'type': 'type 4s ease-in-out infinite',
+        'ripple': 'ripple 0.6s ease-out',
       },
       keyframes: {
         'accordion-down': {
@@ -141,6 +155,20 @@ export default {
           },
           '50%': {
             transform: 'translateY(-10px)'
+          }
+        },
+        type: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.5' }
+        },
+        ripple: {
+          '0%': {
+            transform: 'scale(0)',
+            opacity: '1'
+          },
+          '100%': {
+            transform: 'scale(4)',
+            opacity: '0'
           }
         }
       }

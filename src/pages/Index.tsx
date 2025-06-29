@@ -3,8 +3,11 @@ import React, { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
+import Timeline from '@/components/Timeline';
 import Services from '@/components/Services';
+import FeatureSpotlight from '@/components/FeatureSpotlight';
 import Testimonials from '@/components/Testimonials';
+import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -25,12 +28,15 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
       <Navigation />
       <Hero />
       <About />
+      <Timeline />
       <Services />
+      <FeatureSpotlight />
       <Testimonials />
+      <FAQ />
       <Contact />
       <Footer />
     </div>
