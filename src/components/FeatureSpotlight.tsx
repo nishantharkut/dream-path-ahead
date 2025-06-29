@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Search, Smartphone, BarChart3 } from 'lucide-react';
+import { Search, Smartphone, BarChart3, ArrowRight } from 'lucide-react';
 
 const FeatureSpotlight = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,80 +28,67 @@ const FeatureSpotlight = () => {
       icon: Search,
       title: 'SEO Optimization',
       description: 'Advanced search engine optimization to ensure maximum visibility and reach for your career profile.',
-      details: 'Comprehensive keyword research, meta optimization, and structured data implementation.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      reverse: false
+      details: 'Comprehensive keyword research, meta optimization, and structured data implementation for better search rankings.'
     },
     {
       icon: Smartphone,
       title: 'PWA Support',
       description: 'Progressive Web App capabilities for seamless mobile experience and offline functionality.',
-      details: 'Service worker implementation, caching strategies, and native app-like performance.',
-      image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      reverse: true
+      details: 'Service worker implementation, caching strategies, and native app-like performance across all devices.'
     },
     {
       icon: BarChart3,
       title: 'Analytics Integration',
       description: 'Comprehensive analytics to track your career progress and optimize your professional journey.',
-      details: 'Real-time insights, performance metrics, and actionable recommendations.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      reverse: false
+      details: 'Real-time insights, performance metrics, and actionable recommendations to accelerate your growth.'
     }
   ];
 
   return (
     <section id="features" ref={sectionRef} className="section-padding bg-gray-50 dark:bg-gray-900">
       <div className="container-custom">
-        <div className={`text-center mb-16 transition-all duration-1000 transform ${
+        <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 transform ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
-          <h2 className="text-4xl sm:text-5xl font-bold text-light-text dark:text-dark-text mb-6 font-poppins">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-light-text dark:text-dark-text mb-4 sm:mb-6 font-poppins">
             Feature <span className="text-light-accent dark:text-dark-accent">Spotlight</span>
           </h2>
-          <p className="text-xl text-light-subtext dark:text-dark-subtext max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-light-subtext dark:text-dark-subtext max-w-3xl mx-auto leading-relaxed">
             Cutting-edge technology powering your career transformation
           </p>
         </div>
 
-        <div className="space-y-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`grid lg:grid-cols-2 gap-12 items-center ${
-                feature.reverse ? 'lg:grid-flow-col-dense' : ''
+              className={`card-neumorphism rounded-2xl p-6 sm:p-8 hover:shadow-xl transform hover:scale-105 transition-all duration-300 group ${
+                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
               }`}
+              style={{ transitionDelay: `${index * 200}ms` }}
             >
-              <div className={`${feature.reverse ? 'lg:col-start-2' : ''} transition-all duration-1000 transform ${
-                isVisible ? 'translate-x-0 opacity-100' : `${feature.reverse ? 'translate-x-10' : '-translate-x-10'} opacity-0`
-              }`} style={{ transitionDelay: `${index * 300}ms` }}>
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-light-accent dark:bg-dark-accent rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                    <feature.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-light-text dark:text-dark-text font-poppins">{feature.title}</h3>
-                </div>
-                <p className="text-lg text-light-subtext dark:text-dark-subtext mb-6 leading-relaxed">
-                  {feature.description}
-                </p>
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300">
-                  <p className="text-light-text dark:text-dark-text font-medium">{feature.details}</p>
-                </div>
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-light-accent dark:bg-dark-accent rounded-2xl flex items-center justify-center mb-4 sm:mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                <feature.icon className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
               </div>
               
-              <div className={`${feature.reverse ? 'lg:col-start-1' : ''} transition-all duration-1000 transform ${
-                isVisible ? 'translate-x-0 opacity-100' : `${feature.reverse ? '-translate-x-10' : 'translate-x-10'} opacity-0`
-              }`} style={{ transitionDelay: `${index * 300 + 150}ms` }}>
-                <div className="relative group">
-                  <div className="absolute inset-0 bg-light-accent dark:bg-dark-accent rounded-2xl transform rotate-3 opacity-20 group-hover:rotate-6 transition-transform duration-300"></div>
-                  <img
-                    src={feature.image}
-                    alt={feature.title}
-                    className="relative w-full h-80 object-cover rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-300"
-                    loading="lazy"
-                  />
-                </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-light-text dark:text-dark-text mb-3 sm:mb-4 font-poppins">
+                {feature.title}
+              </h3>
+              
+              <p className="text-sm sm:text-base text-light-subtext dark:text-dark-subtext mb-4 sm:mb-6 leading-relaxed">
+                {feature.description}
+              </p>
+              
+              <div className="bg-white/50 dark:bg-gray-800/50 p-4 rounded-xl mb-4 sm:mb-6 border border-gray-200/50 dark:border-gray-700/50">
+                <p className="text-xs sm:text-sm text-light-text dark:text-dark-text font-medium leading-relaxed">
+                  {feature.details}
+                </p>
               </div>
+              
+              <button className="inline-flex items-center text-light-accent dark:text-dark-accent font-semibold text-sm sm:text-base hover:underline transition-all duration-300 group-hover:translate-x-1">
+                Learn More
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </button>
             </div>
           ))}
         </div>

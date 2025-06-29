@@ -6,21 +6,52 @@ const CustomCursor = () => {
   const [dotPosition, setDotPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
+    let animationFrameId: number;
+    let lastTime = 0;
+    const throttleTime = 1000 / 30; // 30 fps limit for performance
+
     const updateCursorPosition = (e: MouseEvent) => {
-      setCursorPosition({ x: e.clientX, y: e.clientY });
+      const currentTime = Date.now();
       
-      // Delayed dot follow effect
-      setTimeout(() => {
-        setDotPosition({ x: e.clientX, y: e.clientY });
-      }, 50);
+      if (currentTime - lastTime >= throttleTime) {
+        setCursorPosition({ x: e.clientX, y: e.clientY });
+        
+        // Delayed dot follow effect with throttling
+        setTimeout(() => {
+          setDotPosition({ x: e.clientX, y: e.clientY });
+        }, 50);
+        
+        lastTime = currentTime;
+      }
     };
 
-    window.addEventListener('mousemove', updateCursorPosition);
+    const throttledUpdate = (e: MouseEvent) => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      
+      animationFrameId = requestAnimationFrame(() => {
+        updateCursorPosition(e);
+      });
+    };
+
+    // Only add cursor effects on desktop devices
+    if (window.innerWidth >= 1024) {
+      window.addEventListener('mousemove', throttledUpdate, { passive: true });
+    }
 
     return () => {
-      window.removeEventListener('mousemove', updateCursorPosition);
+      window.removeEventListener('mousemove', throttledUpdate);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
     };
   }, []);
+
+  // Only render on large screens to improve performance
+  if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+    return null;
+  }
 
   return (
     <>

@@ -1,9 +1,10 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* 
-Design Rationale: Ultra-modern professional design with precise WCAG AA contrast ratios. Custom color tokens ensure 4.5:1 minimum contrast in both modes. Advanced animations, glassmorphism effects, and micro-interactions create premium UX. Three-layer parallax, typed text effects, and interactive timelines establish visual sophistication while maintaining accessibility standards.
+Design Rationale: Ultra-modern professional design with precise WCAG AA contrast ratios. Fixed duplicates, optimized cursor, repositioned CTA, improved responsiveness, refined timeline.
 */
 
 @layer base {
@@ -61,7 +62,13 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
   body {
     @apply bg-background text-foreground font-inter antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
-    cursor: none;
+    cursor: auto;
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      cursor: none;
+    }
   }
 
   html {
@@ -73,7 +80,7 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
   }
 }
 
-/* Custom Cursor */
+/* Optimized Custom Cursor with better performance */
 .cursor {
   width: 20px;
   height: 20px;
@@ -86,6 +93,7 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
   z-index: 9999;
   mix-blend-mode: difference;
   transition: all 0.1s ease;
+  will-change: transform;
 }
 
 .cursor-dot {
@@ -99,6 +107,7 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
   pointer-events: none;
   z-index: 10000;
   transition: all 0.1s ease;
+  will-change: transform;
 }
 
 /* Scroll Progress Indicator */
@@ -163,7 +172,7 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
   }
   
   .section-padding {
-    @apply py-20 lg:py-24;
+    @apply py-12 sm:py-16 lg:py-20 xl:py-24;
   }
   
   .container-custom {
@@ -308,9 +317,15 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
   }
 }
 
-/* Scrollbar Styling */
+/* Responsive Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
+}
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
 }
 
 ::-webkit-scrollbar-track {
@@ -329,4 +344,17 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
 ::selection {
   background-color: hsl(var(--primary) / 0.3);
   color: hsl(var(--foreground));
+}
+
+/* Enhanced responsive utilities */
+@media (max-width: 320px) {
+  .container-custom {
+    @apply px-3;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container-custom {
+    @apply max-w-8xl;
+  }
 }
