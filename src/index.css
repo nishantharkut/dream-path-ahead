@@ -355,6 +355,6 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
 
 @media (min-width: 1440px) {
   .container-custom {
-    @apply max-w-8xl;
+    @apply max-w-screen-2xl;
   }
 }
