@@ -55,17 +55,23 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
 }
 
 @layer base {
-  * {
+  /* * {
     @apply border-border;
+  } */
+
+  *, *::before, *::after {
+    box-sizing: border-box;
   }
-  
+
   body {
     @apply bg-background text-foreground font-inter antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
   }
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
