@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Search, Smartphone, BarChart3, ArrowRight } from 'lucide-react';
+import { Search, Smartphone, BarChart3, ArrowRight, Zap, Shield, Globe } from 'lucide-react';
 
 const FeatureSpotlight = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,24 +28,27 @@ const FeatureSpotlight = () => {
       icon: Search,
       title: 'SEO Optimization',
       description: 'Advanced search engine optimization to ensure maximum visibility and reach for your career profile.',
-      details: 'Comprehensive keyword research, meta optimization, and structured data implementation for better search rankings.'
+      details: 'Comprehensive keyword research, meta optimization, and structured data implementation for better search rankings.',
+      color: 'bg-blue-500'
     },
     {
       icon: Smartphone,
       title: 'PWA Support',
       description: 'Progressive Web App capabilities for seamless mobile experience and offline functionality.',
-      details: 'Service worker implementation, caching strategies, and native app-like performance across all devices.'
+      details: 'Service worker implementation, caching strategies, and native app-like performance across all devices.',
+      color: 'bg-green-500'
     },
     {
       icon: BarChart3,
       title: 'Analytics Integration',
       description: 'Comprehensive analytics to track your career progress and optimize your professional journey.',
-      details: 'Real-time insights, performance metrics, and actionable recommendations to accelerate your growth.'
+      details: 'Real-time insights, performance metrics, and actionable recommendations to accelerate your growth.',
+      color: 'bg-purple-500'
     }
   ];
 
   return (
-    <section id="features" ref={sectionRef} className="section-padding bg-gray-50 dark:bg-gray-900">
+    <section id="features" ref={sectionRef} className="section-padding bg-light-bg dark:bg-dark-bg">
       <div className="container-custom">
         <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 transform ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
@@ -62,12 +65,12 @@ const FeatureSpotlight = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`card-neumorphism rounded-2xl p-6 sm:p-8 hover:shadow-xl transform hover:scale-105 transition-all duration-300 group ${
+              className={`bg-light-bg dark:bg-dark-bg border border-gray-200 dark:border-gray-700 rounded-2xl p-6 sm:p-8 hover:shadow-xl hover:shadow-light-accent/10 dark:hover:shadow-dark-accent/10 transform hover:scale-105 transition-all duration-300 group ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
               }`}
               style={{ transitionDelay: `${index * 200}ms` }}
             >
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-light-accent dark:bg-dark-accent rounded-2xl flex items-center justify-center mb-4 sm:mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
+              <div className={`w-14 h-14 sm:w-16 sm:h-16 ${feature.color} rounded-2xl flex items-center justify-center mb-4 sm:mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110`}>
                 <feature.icon className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
               </div>
               
@@ -79,7 +82,7 @@ const FeatureSpotlight = () => {
                 {feature.description}
               </p>
               
-              <div className="bg-white/50 dark:bg-gray-800/50 p-4 rounded-xl mb-4 sm:mb-6 border border-gray-200/50 dark:border-gray-700/50">
+              <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl mb-4 sm:mb-6 border border-gray-100 dark:border-gray-600">
                 <p className="text-xs sm:text-sm text-light-text dark:text-dark-text font-medium leading-relaxed">
                   {feature.details}
                 </p>

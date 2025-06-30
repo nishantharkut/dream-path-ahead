@@ -49,15 +49,15 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-light-bg dark:bg-dark-bg">
       {/* Three-layer Parallax Background */}
       <div className="absolute inset-0">
         {/* Layer 1: Base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-light-accent dark:from-dark-bg dark:via-gray-900 dark:to-dark-accent"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-light-bg via-gray-100 to-light-accent/20 dark:from-dark-bg dark:via-gray-900 dark:to-dark-accent/20"></div>
         
         {/* Layer 2: SVG Waves */}
-        <svg className="absolute bottom-0 w-full h-32 sm:h-48 lg:h-64 opacity-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,50 C300,100 500,0 800,50 C1000,100 1200,0 1200,50 L1200,120 L0,120 Z" fill="currentColor" className="text-white dark:text-gray-800" />
+        <svg className="absolute bottom-0 w-full h-32 sm:h-48 lg:h-64 opacity-10 dark:opacity-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,50 C300,100 500,0 800,50 C1000,100 1200,0 1200,50 L1200,120 L0,120 Z" fill="currentColor" className="text-light-accent dark:text-dark-accent" />
         </svg>
         
         {/* Layer 3: Floating particles */}
@@ -65,7 +65,7 @@ const Hero = () => {
           {[...Array(20)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-white dark:bg-gray-300 rounded-full opacity-30 animate-float"
+              className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-light-accent/30 dark:bg-dark-accent/30 rounded-full animate-float"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -99,14 +99,14 @@ const Hero = () => {
         }`}>
           {/* Glassmorphism Container */}
           <div className="glassmorphism rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 mb-6 sm:mb-8 animate-tilt">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 font-poppins leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-light-text dark:text-dark-text mb-4 sm:mb-6 font-poppins leading-tight">
               ALL ABOUT YOUR
-              <span className="block">
+              <span className="block text-light-accent dark:text-dark-accent">
                 <TypedText />
               </span>
             </h1>
             
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed font-inter">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-light-subtext dark:text-dark-subtext mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed font-inter">
               Beyond Career empowers students with career guidance, internships, and mentorship. 
               Founded by IIT Kharagpur alumni, we're here to turn your aspirations into achievements.
             </p>
@@ -116,7 +116,7 @@ const Hero = () => {
             <Button 
               onClick={scrollToAbout}
               size="lg" 
-              className="btn-primary btn-glow animate-pulse-glow font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 group relative overflow-hidden w-full sm:w-auto"
+              className="bg-light-accent hover:bg-light-accent/90 dark:bg-dark-accent dark:hover:bg-dark-accent/90 text-white btn-glow animate-pulse-glow font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 group relative overflow-hidden w-full sm:w-auto"
             >
               <span className="relative z-10">Discover Your Path</span>
               <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1 relative z-10" />
@@ -125,35 +125,35 @@ const Hero = () => {
               variant="outline" 
               size="lg"
               onClick={scrollToContact}
-              className="border-white/30 text-white hover:bg-white hover:text-slate-900 font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-full backdrop-blur-sm transform hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+              className="border-light-accent/50 dark:border-dark-accent/50 text-light-text dark:text-dark-text hover:bg-light-accent hover:text-white dark:hover:bg-dark-accent dark:hover:text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-full backdrop-blur-sm transform hover:scale-105 transition-all duration-300 w-full sm:w-auto"
             >
               Join Community
             </Button>
           </div>
         </div>
+      </div>
 
-        {/* Scroll Indicator - Positioned at bottom center, sticky for first viewport */}
-        <div className={`absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-1000 delay-500 ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        } ${scrollY > window.innerHeight * 0.3 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          <button
-            onClick={scrollToAbout}
-            className="flex flex-col items-center text-white/70 hover:text-white transition-colors duration-300 group"
-          >
-            <span className="text-xs sm:text-sm mb-2 font-medium">Scroll to explore</span>
-            <ChevronDown 
-              size={20} 
-              className="sm:w-6 sm:h-6 animate-bounce group-hover:transform group-hover:scale-110 transition-transform duration-300" 
-            />
-          </button>
-        </div>
+      {/* Scroll Indicator - Fixed positioning at bottom center */}
+      <div className={`fixed bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-500 ${
+        scrollY > window.innerHeight * 0.5 ? 'opacity-0 pointer-events-none translate-y-10' : 'opacity-100 translate-y-0'
+      }`}>
+        <button
+          onClick={scrollToAbout}
+          className="flex flex-col items-center text-light-subtext dark:text-dark-subtext hover:text-light-accent dark:hover:text-dark-accent transition-colors duration-300 group bg-light-bg/80 dark:bg-dark-bg/80 backdrop-blur-sm rounded-full px-4 py-3 shadow-lg hover:shadow-xl"
+        >
+          <span className="text-xs sm:text-sm mb-2 font-medium">Scroll to explore</span>
+          <ChevronDown 
+            size={20} 
+            className="sm:w-6 sm:h-6 animate-bounce group-hover:transform group-hover:scale-110 transition-transform duration-300" 
+          />
+        </button>
       </div>
 
       {/* Sticky Get Started Button - Repositioned and responsive */}
       <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 z-50">
         <Button
           onClick={scrollToContact}
-          className="bg-light-accent dark:bg-dark-accent text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 animate-pulse-glow font-semibold"
+          className="bg-light-accent dark:bg-dark-accent hover:bg-light-accent/90 dark:hover:bg-dark-accent/90 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 animate-pulse-glow font-semibold"
         >
           Get Started
         </Button>
