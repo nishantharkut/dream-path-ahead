@@ -2,19 +2,26 @@
 import React, { useEffect, useState } from 'react';
 
 const TypedText = () => {
-  const words = ['DREAMS', 'GUIDANCE', 'MENTORSHIP', 'OPPORTUNITIES', 'SUCCESS'];
+  const words = ['DREAMS', 'GUIDANCE', 'MENTORSHIP', 'OPPORTUNITIES', 'SUCCESS', 'FUTURE'];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const currentWord = words[currentWordIndex];
     const timeout = setTimeout(() => {
+      if (isPaused) {
+        setIsPaused(false);
+        setTimeout(() => setIsDeleting(true), 1500);
+        return;
+      }
+
       if (!isDeleting) {
         if (displayText.length < currentWord.length) {
           setDisplayText(currentWord.slice(0, displayText.length + 1));
         } else {
-          setTimeout(() => setIsDeleting(true), 2000);
+          setIsPaused(true);
         }
       } else {
         if (displayText.length > 0) {
@@ -24,17 +31,25 @@ const TypedText = () => {
           setCurrentWordIndex((prev) => (prev + 1) % words.length);
         }
       }
-    }, isDeleting ? 50 : 100);
+    }, isDeleting ? 75 : isPaused ? 2000 : 150);
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentWordIndex, words]);
+  }, [displayText, isDeleting, currentWordIndex, words, isPaused]);
 
   return (
     <span className="relative inline-block">
-      <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-pulse">
+      <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-bold animate-pulse">
         {displayText}
       </span>
-      <span className="animate-pulse text-blue-600 dark:text-blue-400 ml-1">|</span>
+      <span className="animate-pulse text-blue-400 dark:text-blue-300 ml-2 text-6xl">|</span>
+      
+      {/* Glow effect */}
+      <span 
+        className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent opacity-50 blur-sm animate-pulse"
+        aria-hidden="true"
+      >
+        {displayText}
+      </span>
     </span>
   );
 };
