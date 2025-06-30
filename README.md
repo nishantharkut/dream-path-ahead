@@ -19,13 +19,64 @@ npm run build
 npm run preview
 ```
 
+## Light/Dark Mode Color Customization
+
+### CSS Variables (Primary Method)
+Edit `src/index.css` lines 9-45 for color customization:
+
+**Light Mode Colors:**
+```css
+:root {
+  --primary: 198 69% 47%;        /* Main blue accent */
+  --background: 0 0% 100%;       /* White background */
+  --foreground: 215 25% 15%;     /* Dark text */
+  --card: 0 0% 100%;            /* Card backgrounds */
+  --muted: 215 20% 96%;         /* Subtle backgrounds */
+  --border: 215 20% 90%;        /* Border colors */
+}
+```
+
+**Dark Mode Colors:**
+```css
+.dark {
+  --primary: 198 69% 47%;        /* Main blue accent */
+  --background: 215 30% 7%;      /* Dark background */
+  --foreground: 0 0% 98%;        /* Light text */
+  --card: 215 30% 10%;          /* Card backgrounds */
+  --muted: 215 25% 15%;         /* Subtle backgrounds */
+  --border: 215 25% 18%;        /* Border colors */
+}
+```
+
+### Tailwind Custom Colors
+Edit `tailwind.config.ts` lines 31-42 for component-specific colors:
+
+```typescript
+colors: {
+  light: {
+    bg: '#FFFFFF',           /* Light background */
+    text: '#1F2937',         /* Light mode text */
+    accent: '#2E8BC0',       /* Light accent color */
+    subtext: '#4B5563'       /* Light subtext */
+  },
+  dark: {
+    bg: '#121212',           /* Dark background */
+    text: '#E5E7EB',         /* Dark mode text */
+    accent: '#2E8BC0',       /* Dark accent color */
+    subtext: '#9CA3AF'       /* Dark subtext */
+  },
+}
+```
+
+### Quick Color Changes
+1. **Primary Accent**: Change `--primary` values in both light/dark modes
+2. **Backgrounds**: Modify `--background` and `--card` values
+3. **Text Colors**: Update `--foreground` and `--muted-foreground`
+4. **Component Colors**: Edit `light.*` and `dark.*` values in Tailwind config
+
 ## Technical Documentation
 
 Modern React application with TypeScript, Tailwind CSS, next-themes dark mode, advanced animations, SEO optimization, PWA features, and responsive design for optimal performance.
-
-## Light/Dark Mode Implementation
-
-The application uses `next-themes` for seamless theme switching with system preference detection. Custom CSS variables ensure consistent theming across all components with WCAG AA contrast ratios (4.5:1 minimum) for accessibility compliance.
 
 ## Color Palette & Design Decisions
 
@@ -37,24 +88,19 @@ One-click deployment to Vercel using `vercel.json` configuration. Simply connect
 
 ## Features
 
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Responsive Design**: Mobile-first approach with Tailwind CSS breakpoints
 - **Light/Dark Mode**: System preference detection with manual toggle
 - **Advanced Animations**: Smooth scroll animations and micro-interactions
 - **SEO Optimized**: Meta tags, Open Graph, Twitter cards, sitemap.xml
 - **PWA Ready**: Service worker for offline support
 - **Accessibility**: WCAG 2.1 AA compliant with proper contrast ratios
-- **Performance**: Lazy loading, dynamic imports, optimized assets
+- **Performance**: Optimized assets and efficient rendering
 - **Modern Typography**: Inter/Poppins font combination
 - **Professional UI**: Clean, trustworthy design suitable for business
-- **Custom Cursor**: Mouse-driven cursor effects for desktop
-- **Scroll Progress**: Visual progress indicator
-- **Glassmorphism**: Modern glass effect panels
-- **Neumorphism**: Soft, modern card designs
-- **Interactive Timeline**: Horizontal scroll with clickable steps
-- **Feature Spotlight**: Split-screen showcases with hover effects
-- **FAQ Accordion**: Smooth animations with dark/light variants
-- **Typed Text Effect**: Dynamic headline animation
-- **Three-Layer Parallax**: Advanced background depth effects
+- **Social Media Integration**: GitHub, LinkedIn, Twitter, Instagram links
+- **Enhanced Hero Section**: Glassmorphism effects with animated backgrounds
+- **Interactive Elements**: Hover effects and smooth transitions
+- **Cross-Device Responsive**: Optimized for mobile, tablet, and desktop
 
 ## Live URL
 

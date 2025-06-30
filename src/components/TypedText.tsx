@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 const TypedText = () => {
-  const words = ['DREAMS', 'GUIDANCE', 'MENTORSHIP', 'OPPORTUNITIES'];
+  const words = ['DREAMS', 'GUIDANCE', 'MENTORSHIP', 'OPPORTUNITIES', 'SUCCESS'];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -30,9 +30,11 @@ const TypedText = () => {
   }, [displayText, isDeleting, currentWordIndex, words]);
 
   return (
-    <span className="text-primary animate-float">
-      {displayText}
-      <span className="animate-pulse">|</span>
+    <span className="relative inline-block">
+      <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-pulse">
+        {displayText}
+      </span>
+      <span className="animate-pulse text-blue-600 dark:text-blue-400 ml-1">|</span>
     </span>
   );
 };

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { ChevronDown, ArrowRight } from 'lucide-react';
+import { ChevronDown, ArrowRight, Github, Linkedin, Twitter, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import TypedText from '@/components/TypedText';
 
@@ -16,8 +16,8 @@ const Hero = () => {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
+        x: (e.clientX / window.innerWidth - 0.5) * 30,
+        y: (e.clientY / window.innerHeight - 0.5) * 30,
       });
     };
 
@@ -48,24 +48,33 @@ const Hero = () => {
     }
   };
 
+  const socialLinks = [
+    { icon: Github, href: '#', label: 'GitHub' },
+    { icon: Linkedin, href: '#', label: 'LinkedIn' },
+    { icon: Twitter, href: '#', label: 'Twitter' },
+    { icon: Instagram, href: '#', label: 'Instagram' },
+  ];
+
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-light-bg dark:bg-dark-bg">
-      {/* Three-layer Parallax Background */}
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-900 dark:to-indigo-900">
+      {/* Enhanced Multi-layer Background */}
       <div className="absolute inset-0">
-        {/* Layer 1: Base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-light-bg via-gray-100 to-light-accent/20 dark:from-dark-bg dark:via-gray-900 dark:to-dark-accent/20"></div>
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-blue-500/10 to-purple-500/20 dark:from-slate-900/50 dark:via-blue-900/30 dark:to-purple-900/20"></div>
         
-        {/* Layer 2: SVG Waves */}
-        <svg className="absolute bottom-0 w-full h-32 sm:h-48 lg:h-64 opacity-10 dark:opacity-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,50 C300,100 500,0 800,50 C1000,100 1200,0 1200,50 L1200,120 L0,120 Z" fill="currentColor" className="text-light-accent dark:text-dark-accent" />
-        </svg>
+        {/* Animated mesh gradient */}
+        <div className="absolute inset-0 opacity-60 dark:opacity-40">
+          <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse dark:bg-purple-800"></div>
+          <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000 dark:bg-yellow-800"></div>
+          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000 dark:bg-pink-800"></div>
+        </div>
         
-        {/* Layer 3: Floating particles */}
+        {/* Floating particles */}
         <div className="absolute inset-0">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(30)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-light-accent/30 dark:bg-dark-accent/30 rounded-full animate-float"
+              className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-blue-400/30 dark:bg-blue-300/30 rounded-full animate-float"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -80,11 +89,11 @@ const Hero = () => {
       {/* Parallax Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
-          className="absolute top-1/4 left-1/4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-light-accent/10 dark:bg-dark-accent/10 rounded-full blur-3xl animate-pulse parallax-layer"
+          className="absolute top-1/4 left-1/4 w-32 h-32 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-gradient-to-r from-blue-400/20 to-purple-400/20 dark:from-blue-500/20 dark:to-purple-500/20 rounded-full blur-3xl animate-pulse"
           style={{ transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)` }}
         />
         <div 
-          className="absolute top-3/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-light-accent/5 dark:bg-dark-accent/5 rounded-full blur-3xl animate-pulse parallax-layer" 
+          className="absolute top-3/4 right-1/4 w-48 h-48 sm:w-80 sm:h-80 lg:w-128 lg:h-128 bg-gradient-to-r from-pink-400/15 to-yellow-400/15 dark:from-pink-500/15 dark:to-yellow-500/15 rounded-full blur-3xl animate-pulse" 
           style={{ 
             animationDelay: '1s',
             transform: `translate(${mousePosition.x * 0.3}px, ${mousePosition.y * 0.3}px)`
@@ -97,65 +106,104 @@ const Hero = () => {
         <div className={`transition-all duration-1000 transform ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
-          {/* Glassmorphism Container */}
-          <div className="glassmorphism rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 mb-6 sm:mb-8 animate-tilt">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-light-text dark:text-dark-text mb-4 sm:mb-6 font-poppins leading-tight">
-              ALL ABOUT YOUR
-              <span className="block text-light-accent dark:text-dark-accent">
-                <TypedText />
-              </span>
-            </h1>
+          {/* Enhanced Glassmorphism Container */}
+          <div className="relative backdrop-blur-xl bg-white/10 dark:bg-black/10 rounded-3xl sm:rounded-4xl p-6 sm:p-8 lg:p-12 mb-8 border border-white/20 dark:border-white/10 shadow-2xl">
+            {/* Glow effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-lg"></div>
             
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-light-subtext dark:text-dark-subtext mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed font-inter">
-              Beyond Career empowers students with career guidance, internships, and mentorship. 
-              Founded by IIT Kharagpur alumni, we're here to turn your aspirations into achievements.
-            </p>
+            <div className="relative">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-slate-800 dark:text-white mb-6 sm:mb-8 font-poppins leading-tight">
+                ALL ABOUT YOUR
+                <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  <TypedText />
+                </span>
+              </h1>
+              
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-slate-600 dark:text-slate-300 mb-8 sm:mb-10 max-w-5xl mx-auto leading-relaxed font-inter">
+                Beyond Career empowers students with career guidance, internships, and mentorship. 
+                Founded by IIT Kharagpur alumni, we're here to turn your aspirations into achievements.
+              </p>
+            </div>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+          {/* Enhanced CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-8">
             <Button 
               onClick={scrollToAbout}
               size="lg" 
-              className="bg-light-accent hover:bg-light-accent/90 dark:bg-dark-accent dark:hover:bg-dark-accent/90 text-white btn-glow animate-pulse-glow font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 group relative overflow-hidden w-full sm:w-auto"
+              className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300 w-full sm:w-auto"
             >
               <span className="relative z-10">Discover Your Path</span>
-              <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1 relative z-10" />
+              <ArrowRight className="ml-2 h-5 w-5 sm:h-6 sm:w-6 transition-transform group-hover:translate-x-1 relative z-10" />
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Button>
+            
             <Button 
               variant="outline" 
               size="lg"
               onClick={scrollToContact}
-              className="border-light-accent/50 dark:border-dark-accent/50 text-light-text dark:text-dark-text hover:bg-light-accent hover:text-white dark:hover:bg-dark-accent dark:hover:text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-full backdrop-blur-sm transform hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+              className="group border-2 border-slate-300 dark:border-slate-600 bg-white/20 dark:bg-black/20 backdrop-blur-sm text-slate-800 dark:text-white hover:bg-white/30 dark:hover:bg-black/30 font-semibold px-8 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl rounded-full transform hover:scale-105 transition-all duration-300 w-full sm:w-auto"
             >
               Join Community
             </Button>
           </div>
+
+          {/* Social Media Buttons */}
+          <div className="flex justify-center space-x-4 sm:space-x-6">
+            {socialLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.href}
+                aria-label={social.label}
+                className="group p-3 sm:p-4 bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-full border border-white/20 dark:border-white/10 hover:bg-white/20 dark:hover:bg-black/20 transform hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                <social.icon className="w-5 h-5 sm:w-6 sm:h-6 text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Scroll Indicator - Fixed positioning at bottom center */}
+      {/* Enhanced Scroll Indicator */}
       <div className={`fixed bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-500 ${
-        scrollY > window.innerHeight * 0.5 ? 'opacity-0 pointer-events-none translate-y-10' : 'opacity-100 translate-y-0'
+        scrollY > window.innerHeight * 0.3 ? 'opacity-0 pointer-events-none translate-y-10' : 'opacity-100 translate-y-0'
       }`}>
         <button
           onClick={scrollToAbout}
-          className="flex flex-col items-center text-light-subtext dark:text-dark-subtext hover:text-light-accent dark:hover:text-dark-accent transition-colors duration-300 group bg-light-bg/80 dark:bg-dark-bg/80 backdrop-blur-sm rounded-full px-4 py-3 shadow-lg hover:shadow-xl"
+          className="group relative flex flex-col items-center"
         >
-          <span className="text-xs sm:text-sm mb-2 font-medium">Scroll to explore</span>
-          <ChevronDown 
-            size={20} 
-            className="sm:w-6 sm:h-6 animate-bounce group-hover:transform group-hover:scale-110 transition-transform duration-300" 
-          />
+          {/* Animated border */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full p-0.5 animate-spin-slow">
+            <div className="bg-white/90 dark:bg-black/90 rounded-full w-full h-full"></div>
+          </div>
+          
+          {/* Content */}
+          <div className="relative bg-white/90 dark:bg-black/90 backdrop-blur-xl rounded-full px-6 py-4 shadow-2xl border border-white/20 dark:border-white/10 group-hover:bg-white dark:group-hover:bg-black transition-all duration-300">
+            <span className="text-sm sm:text-base mb-2 font-medium text-slate-700 dark:text-slate-300 block">
+              Scroll to explore
+            </span>
+            <div className="flex justify-center">
+              <ChevronDown 
+                size={24} 
+                className="text-slate-600 dark:text-slate-400 animate-bounce group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" 
+              />
+            </div>
+          </div>
+          
+          {/* Pulse rings */}
+          <div className="absolute inset-0 rounded-full bg-blue-500/20 animate-ping"></div>
+          <div className="absolute inset-0 rounded-full bg-purple-500/20 animate-ping animation-delay-1000"></div>
         </button>
       </div>
 
-      {/* Sticky Get Started Button - Repositioned and responsive */}
+      {/* Floating Get Started Button */}
       <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 z-50">
         <Button
           onClick={scrollToContact}
-          className="bg-light-accent dark:bg-dark-accent hover:bg-light-accent/90 dark:hover:bg-dark-accent/90 text-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 animate-pulse-glow font-semibold"
+          className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 font-semibold"
         >
-          Get Started
+          <span className="relative z-10">Get Started</span>
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </Button>
       </div>
     </section>

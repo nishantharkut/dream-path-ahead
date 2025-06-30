@@ -1,11 +1,10 @@
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* 
-Design Rationale: Ultra-modern professional design with precise WCAG AA contrast ratios. Fixed duplicates, optimized cursor, repositioned CTA, improved responsiveness, refined timeline.
+Design Rationale: Ultra-modern professional design with precise WCAG AA contrast ratios. Fixed duplicates, optimized cursor, repositioned CTA, improved responsiveness, refined timeline. Enhanced hero section with better animations and social media integration.
 */
 
 @layer base {
@@ -61,15 +60,8 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
   }
   
   body {
-    @apply bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text font-inter antialiased;
+    @apply bg-background text-foreground font-inter antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
-    cursor: auto;
-  }
-
-  @media (min-width: 1024px) {
-    body {
-      cursor: none;
-    }
   }
 
   html {
@@ -77,11 +69,11 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-poppins text-light-text dark:text-dark-text;
+    @apply font-poppins;
   }
 }
 
-/* Optimized Custom Cursor with better performance */
+/* Optimized Custom Cursor */
 .cursor {
   width: 20px;
   height: 20px;
@@ -93,7 +85,7 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: difference;
-  transition: all 0.1s ease;
+  transition: all 0.15s ease;
   will-change: transform;
 }
 
@@ -107,7 +99,7 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
   left: 0;
   pointer-events: none;
   z-index: 10000;
-  transition: all 0.1s ease;
+  transition: all 0.15s ease;
   will-change: transform;
 }
 
@@ -165,7 +157,7 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
   }
   
   .btn-primary {
-    @apply bg-light-accent dark:bg-dark-accent text-white hover:bg-light-accent/90 dark:hover:bg-dark-accent/90 transition-all duration-300 hover:scale-105 hover:shadow-xl;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:scale-105 hover:shadow-xl;
   }
   
   .btn-glow {
@@ -249,6 +241,22 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
   
   .animate-tilt:hover {
     transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+  }
+
+  .animate-spin-slow {
+    animation: spin 3s linear infinite;
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1s;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
   }
 }
 
@@ -335,15 +343,15 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
+  @apply bg-muted;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-light-accent/60 dark:bg-dark-accent/60 rounded-full;
+  @apply bg-primary/60 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-light-accent dark:bg-dark-accent;
+  @apply bg-primary;
 }
 
 /* Selection styling */
@@ -364,4 +372,3 @@ Design Rationale: Ultra-modern professional design with precise WCAG AA contrast
     @apply max-w-screen-2xl;
   }
 }
-
